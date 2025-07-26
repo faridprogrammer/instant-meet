@@ -1,1 +1,1 @@
-# instant-voice-room
+# instant-meet

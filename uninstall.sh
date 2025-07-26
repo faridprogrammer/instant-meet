@@ -26,7 +26,7 @@
 # --- Script Configuration ---
 
 # The name must match the one used in the installation script.
-APP_NAME="instantvoiceroom"
+APP_NAME="instantmeet"
 
 # The installation directory must match the one from the install script.
 INSTALL_DIR="/var/www/${APP_NAME}"

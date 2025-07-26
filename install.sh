@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # ==============================================================================
-# InstantVoiceRoom Installation Script for Ubuntu
+# InstantMeet Installation Script for Ubuntu
 # ==============================================================================
-# This script automates the deployment of the InstantVoiceRoom application.
+# This script automates the deployment of the InstantMeet application.
 # It performs the following steps:
 #   1. Checks for required dependencies (.NET 8 SDK, Nginx) and installs them.
 #   2. Builds and publishes the Web and CLI applications to a single directory.
@@ -28,7 +28,7 @@
 
 # The name for the service and configuration files.
 # Keep it simple, no spaces or special characters.
-APP_NAME="instantvoiceroom"
+APP_NAME="instantmeet"
 
 # The directory where the published application will be installed.
 INSTALL_DIR="/var/www/${APP_NAME}"
@@ -136,8 +136,8 @@ print_header "Building and Publishing Applications"
 
 # Define project paths relative to the script's location.
 SCRIPT_DIR=$(dirname "$0")
-WEB_PROJ_PATH="${SCRIPT_DIR}/sources/InstantVoiceRoom.Web/InstantVoiceRoom.Web.csproj"
-CLI_PROJ_PATH="${SCRIPT_DIR}/sources/InstantVoiceRoom.CLI/InstantVoiceRoom.CLI.csproj"
+WEB_PROJ_PATH="${SCRIPT_DIR}/sources/InstantMeet.Web/InstantMeet.Web.csproj"
+CLI_PROJ_PATH="${SCRIPT_DIR}/sources/InstantMeet.CLI/InstantMeet.CLI.csproj"
 
 # Verify that project files exist.
 [ ! -f "$WEB_PROJ_PATH" ] && die "Web project file not found at: $WEB_PROJ_PATH"
@@ -168,12 +168,12 @@ print_header "Configuring systemd service"
 
 # The name of the main web application DLL.
 # dotnet publish renames the entry point DLL to match the project name.
-WEB_DLL_NAME="InstantVoiceRoom.Web.dll"
+WEB_DLL_NAME="InstantMeet.Web.dll"
 
 # Create the service file using a heredoc for readability.
 cat <<EOF > /etc/systemd/system/${APP_NAME}.service
 [Unit]
-Description=InstantVoiceRoom Web Application
+Description=InstantMeet Web Application
 After=network.target
 
 [Service]
@@ -272,7 +272,7 @@ fi
 
 print_header "Installation Complete!"
 echo ""
-echo "The InstantVoiceRoom application has been successfully deployed."
+echo "The InstantMeet application has been successfully deployed."
 
 # Adjust the final URL based on whether the port is the standard HTTP port 80
 if [ "$NGINX_PORT" -eq 80 ]; then
@@ -284,7 +284,7 @@ fi
 echo ""
 echo "--- How to use the CLI ---"
 echo "The command-line tool is located at:"
-echo "${INSTALL_DIR}/InstantVoiceRoom.CLI"
+echo "${INSTALL_DIR}/InstantMeet.CLI"
 echo ""
 echo "--- IMPORTANT NEXT STEPS ---"
 echo "1. DNS: Make sure the A record for '${DOMAIN_NAME}' points to this server's IP address."
